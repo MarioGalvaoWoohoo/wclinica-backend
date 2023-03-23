@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.woohoo.wClinica.models.User;
-import com.woohoo.wClinica.models.dto.UserCreateDTO;
 import com.woohoo.wClinica.repositories.UserRepository;
 
 @Service
