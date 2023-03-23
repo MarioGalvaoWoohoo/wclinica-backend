@@ -3,12 +3,14 @@ package com.woohoo.wClinica.services;
 import java.util.Optional;
 
 import javax.management.RuntimeErrorException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.woohoo.wClinica.models.User;
+import com.woohoo.wClinica.models.dto.UserCreateDTO;
 import com.woohoo.wClinica.repositories.UserRepository;
 
 @Service
@@ -41,10 +43,11 @@ public class UserService {
     public User update(User obj) {
         User newUser = findById(obj.getId());
         newUser.setPassword(obj.getPassword());
+        newUser.setName(obj.getName());
         return this.userRepository.save(newUser);
     }
 
-    
+    @Transactional // Essa anotação só permite a inserção caso de certo, caso contrario desfaz.
     public void delete(Long id) {
         findById(id);
         try {
@@ -52,7 +55,5 @@ public class UserService {
         } catch (Exception e) {
             throw new RuntimeException("Não é possivel excluir, pois há entidades relacionadas!");
         }
-        
     }
-
 }

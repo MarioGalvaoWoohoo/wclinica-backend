@@ -1,8 +1,6 @@
 package com.woohoo.wClinica.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,35 +14,29 @@ import lombok.NoArgsConstructor;
 @Data
 public class User {
 
+    public interface CreateUser {}
+    public interface UpdateUser {}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+    @Column(length = 100, nullable = false)
 	private String name;
 
-    @Column(length = 100, nullable = false, unique = true)
-    @NotNull
-    @NotEmpty
-	private String login;
+    @Column(length = 50, nullable = false, unique = true)
+    private String login;
 
     @Column(length = 60, nullable = false)
-    @NotNull
-    @NotEmpty
-	private String password;
+    private String password;
 	
     @Column(length = 100, nullable = false, unique = true)
-    @NotNull
-    @NotEmpty
     private String email;
 	
     @Column(nullable = false)
-    @NotNull
-    @NotEmpty
     private Boolean status;
 
-    @Column(length = 2, nullable = false)
-    @NotNull
-    @NotEmpty
-	private Integer accessType;
-	
+    @Column(nullable = false)
+    private Integer accessType;
 	
 }
