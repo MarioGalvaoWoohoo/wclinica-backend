@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.woohoo.wClinica.models.User;
-import com.woohoo.wClinica.models.User.CreateUser;
-import com.woohoo.wClinica.models.User.UpdateUser;
 import com.woohoo.wClinica.services.UserService;
 
 @RestController
@@ -47,10 +45,11 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody User user, @PathVariable Long id) {
+    public ResponseEntity<User> update(@Valid @RequestBody User user, @PathVariable Long id) {
         user.setId(id);
         this.userService.update(user);
-        return ResponseEntity.noContent().build();
+        User userUpdated = this.userService.findById(id);
+        return ResponseEntity.ok().body(userUpdated);
     }
 
     @DeleteMapping("/{id}")
