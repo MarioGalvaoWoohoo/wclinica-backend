@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.woohoo.wClinica.models.User;
+import com.woohoo.wClinica.models.dto.UserCreateDTO;
+import com.woohoo.wClinica.models.dto.UserUpdateDTO;
 import com.woohoo.wClinica.repositories.UserRepository;
 
 @Service
@@ -54,5 +56,20 @@ public class UserService {
         } catch (Exception e) {
             throw new RuntimeException("Não é possivel excluir, pois há entidades relacionadas!");
         }
+    }
+
+    public User fromDTO(@Valid UserCreateDTO obj) {
+        User user = new User();
+        user.setName(obj.getName());
+        user.setPassword(obj.getPassword());
+        return user;
+    }
+
+    public User fromDTO(@Valid UserUpdateDTO obj) {
+        User user = new User();
+        user.setId(obj.getId());
+        user.setName(obj.getName());
+        user.setPassword(obj.getPassword());
+        return user;
     }
 }
