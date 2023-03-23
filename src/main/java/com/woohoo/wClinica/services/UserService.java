@@ -60,8 +60,12 @@ public class UserService {
 
     public User fromDTO(@Valid UserCreateDTO obj) {
         User user = new User();
+        user.setLogin(obj.getLogin());
         user.setName(obj.getName());
         user.setPassword(obj.getPassword());
+        user.setAccessType(obj.getAccessType());
+        user.setEmail(obj.getEmail());
+        user.setStatus(obj.getStatus());
         return user;
     }
 

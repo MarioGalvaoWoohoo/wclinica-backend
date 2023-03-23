@@ -1,6 +1,12 @@
 package com.woohoo.wClinica.models;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +42,13 @@ public class User {
     @Column(nullable = false)
     private Boolean status;
 
-    @Column(nullable = false)
+    @Column(name = "access_type", nullable = false)
     private Integer accessType;
+
+    @CreationTimestamp
+    private LocalDateTime created_at;
+
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 	
 }
