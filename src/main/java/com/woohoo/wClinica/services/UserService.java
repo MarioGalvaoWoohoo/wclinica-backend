@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.woohoo.wClinica.models.AccessType;
 import com.woohoo.wClinica.models.User;
 import com.woohoo.wClinica.models.dto.UserCreateDTO;
 import com.woohoo.wClinica.models.dto.UserUpdateDTO;
+import com.woohoo.wClinica.repositories.AccessTypeRepository;
 import com.woohoo.wClinica.repositories.UserRepository;
 
 @Service
@@ -19,6 +21,9 @@ public class UserService {
     
     @Autowired //Tem a função de contrutor
     private UserRepository userRepository;
+
+    @Autowired //Tem a função de contrutor
+    private AccessTypeRepository accessTypeRepository;
 
     public User findById(Long id) {
 
@@ -63,7 +68,7 @@ public class UserService {
         user.setLogin(obj.getLogin());
         user.setName(obj.getName());
         user.setPassword(obj.getPassword());
-        user.setAccessType(obj.getAccessType());
+        // user.setAccessTypeId(user.getAccessTypeId());
         user.setEmail(obj.getEmail());
         user.setStatus(obj.getStatus());
         return user;

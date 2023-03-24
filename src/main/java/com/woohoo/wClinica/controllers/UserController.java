@@ -1,6 +1,7 @@
 package com.woohoo.wClinica.controllers;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.sound.midi.VoiceStatus;
 import javax.validation.Valid;
@@ -18,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.woohoo.wClinica.models.AccessType;
 import com.woohoo.wClinica.models.User;
 import com.woohoo.wClinica.models.dto.UserCreateDTO;
 import com.woohoo.wClinica.models.dto.UserUpdateDTO;
+import com.woohoo.wClinica.repositories.AccessTypeRepository;
+import com.woohoo.wClinica.services.AccessTypeService;
 import com.woohoo.wClinica.services.UserService;
 
 @RestController
@@ -30,6 +34,12 @@ public class UserController {
     
     @Autowired //Injeção de dependencia
     private UserService userService;
+
+    @Autowired //Injeção de dependencia
+    private AccessTypeService accessTypeService;
+
+    @Autowired //Injeção de dependencia
+    private AccessTypeRepository accessTypeRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id ) {
@@ -41,6 +51,7 @@ public class UserController {
     @PostMapping()
     public ResponseEntity<Void> create(@Valid @RequestBody UserCreateDTO obj) {
         User user = this.userService.fromDTO(obj);
+                
         User newUser = this.userService.create(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(newUser.getId()).toUri();

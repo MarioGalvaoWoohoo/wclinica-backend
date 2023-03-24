@@ -3,7 +3,6 @@ package com.woohoo.wClinica.models;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -42,8 +41,10 @@ public class User {
     @Column(nullable = false)
     private Boolean status;
 
-    @Column(name = "access_type", nullable = false)
-    private Integer accessType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "access_type_id", nullable = true)
+    private AccessType accessTypeId;
+
 
     @CreationTimestamp
     private LocalDateTime created_at;
