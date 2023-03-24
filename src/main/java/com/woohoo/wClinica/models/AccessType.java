@@ -12,6 +12,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "access_types")
 public class AccessType {
@@ -28,12 +30,5 @@ public class AccessType {
 
     @UpdateTimestamp
     private LocalDateTime updated_at;
-    
-    public AccessType() {}
-
-    public AccessType(Long id) {
-        this.id = id;
-    }
-
 
 }
